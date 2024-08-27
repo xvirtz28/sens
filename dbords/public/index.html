@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Dashboard</title>
+</head>
+<body>
+    <h1>Sensor Dashboard</h1>
+    <p id="sensorData">Waiting for data...</p>
+    <script>
+        async function fetchSensorData() {
+            try {
+                const response = await fetch('/send-data');
+                const data = await response.text();
+                document.getElementById('sensorData').innerText = data;
+            } catch (error) {
+                console.error('Error fetching sensor data:', error);
+            }
+        }
+
+        // Fetch data every 5 seconds
+        setInterval(fetchSensorData, 5000);
+    </script>
+</body>
+</html>
